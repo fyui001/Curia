@@ -1,0 +1,116 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Edit",
+      "Write",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_hover",
+      "mcp__playwright__browser_drag",
+      "mcp__playwright__browser_select_option",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_handle_dialog",
+      "mcp__playwright__browser_file_upload",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_tabs",
+      "mcp__playwright__browser_navigate_back",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_run_code",
+      "mcp__playwright__browser_install",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Skill(code-review:code-review)",
+      "Skill(code-review:code-review:*)",
+      "Skill(pr-review-toolkit:review-pr)",
+      "Skill(pr-review-toolkit:review-pr:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "sentry@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); cmd=d.get('tool_input',{}).get('command',''); print(json.dumps({'decision':'block','reason':'Direct access to localhost:<port> is prohibited. Use the UI hostname defined in the project CLAUDE.md.'}) if re.search(r'localhost:\\d{4,5}',cmd) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking localhost access..."
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); cmd=d.get('tool_input',{}).get('command',''); print(json.dumps({'hookSpecificOutput':{'hookEventName':'PreToolUse','additionalContext':'[Visual Check] When committing frontend UI changes, you must first verify with Playwright MCP screenshots that everything looks correct. Abort the commit if not verified.'}}) if re.search(r'git\\s+commit', cmd) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Pre-commit visual check..."
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); cmd=d.get('tool_input',{}).get('command',''); pat=r'git\\s+add\\s+.*(\\.env|credentials|secrets)'; print(json.dumps({'decision':'block','reason':'Staging secret files (.env, credentials, etc.) is prohibited.'}) if re.search(pat,cmd) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking for secret files..."
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); cmd=d.get('tool_input',{}).get('command',''); print(json.dumps({'decision':'block','reason':'git push --force is prohibited.'}) if re.search(r'git\\s+push\\s+.*--force',cmd) or re.search(r'git\\s+push\\s+-f\\b',cmd) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking for force push..."
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); cmd=d.get('tool_input',{}).get('command',''); m=re.search(r'git\\s+push\\s+(?:.*\\s+)?(?:origin\\s+)?(main|master)\\b',cmd); print(json.dumps({'decision':'block','reason':'Direct push to main/master is prohibited. Use a pull request.'}) if m else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking push branch..."
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__playwright__browser_take_screenshot",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,os; d=json.load(sys.stdin); path=d.get('tool_input',{}).get('path','') or d.get('tool_input',{}).get('filename','') or ''; print(json.dumps({'decision':'block','reason':'Do not save screenshots to the repository root. Save to docs/generated/{project}/screenshots/ instead.'}) if (path and 'docs/generated' not in path and '/tmp' not in path) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking screenshot save path..."
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__playwright__browser_navigate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,re; d=json.load(sys.stdin); url=d.get('tool_input',{}).get('url',''); print(json.dumps({'decision':'block','reason':'Direct access to localhost:<port> is prohibited. Use the UI hostname defined in the project CLAUDE.md.'}) if re.search(r'localhost:\\d{4,5}',url) else json.dumps({'continue':True}))\"",
+            "timeout": 5,
+            "statusMessage": "Checking Playwright URL..."
+          }
+        ]
+      }
+    ]
+  }
+}

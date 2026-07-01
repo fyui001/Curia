@@ -1,3 +1,8 @@
+---
+name: qa
+description: Ad-hoc cross-cutting QA for a portal, outside the main /requirements→/develop→/acceptance process — parallel PdM full-screen verification + plugin/Tech Lead code review, consensus prioritization, and Issue creation. Invoke with /qa <project> <portal>.
+---
+
 # QA Skill
 
 ## Description

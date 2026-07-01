@@ -1,3 +1,8 @@
+---
+name: requirements
+description: Run the requirements phase for a domain — parallel code-explorer/code-architect analysis + Tech Lead edge-case supplementation + PdM business judgment, producing requirements/tasks/business-rules docs. Invoke with /requirements <project> <domain>.
+---
+
 # Requirements Definition Skill
 
 ## Description

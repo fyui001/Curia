@@ -1,3 +1,8 @@
+---
+name: acceptance
+description: Run the acceptance phase for a domain — PdM drives real screens via Playwright MCP to verify the full business flow and UI/UX against the existing system, files findings, and approves the domain. Invoke with /acceptance <project> <domain>.
+---
+
 # Acceptance Testing Skill
 
 ## Description

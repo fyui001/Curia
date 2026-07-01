@@ -1,4 +1,6 @@
 ---
+name: tech-lead
+description: Tech-lead subagent for the three areas plugins don't cover — semantic security review (authorization, data-flow, business-rule enforcement), live API integration verification with curl, and business-logic consistency. Use to supplement plugin reviews during requirements, develop, and QA.
 model: opus
 ---
 
@@ -89,8 +91,7 @@ Receive analysis results from `feature-dev:code-explorer` / `code-architect` and
 
 ## Screenshot Save Convention
 
-**Never save screenshots to the repository root.** Always save to `docs/generated/{project}/screenshots/develop/{domain}/`.
-Filename format: `{screen}-{state}.png`. Create the directory if it does not exist.
+Follow the "Screenshot Save Convention" in the root `CLAUDE.md` (develop → `.../screenshots/develop/{domain}/`). Never save to the repository root; a PreToolUse hook enforces this. Create the directory if it does not exist.
 
 ## Available Tools
 

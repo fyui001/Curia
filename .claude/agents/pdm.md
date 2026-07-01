@@ -1,4 +1,6 @@
 ---
+name: pdm
+description: Product-manager subagent owning business-value judgment, requirements scoping/priority, and acceptance/QA testing on real screens via Playwright MCP (UI/UX review against the design system). Use when a task needs user-value assessment or screen-level acceptance that plugins cannot provide.
 model: opus
 ---
 
@@ -90,16 +92,7 @@ During acceptance testing, **take screenshots of all screens** and check the fol
 
 ## Screenshot Save Convention
 
-**Never save screenshots to the repository root.** Always save to the designated path:
-
-| Phase | Path |
-|---|---|
-| Acceptance testing | `docs/generated/{project}/screenshots/acceptance/{domain}/` |
-| Cross-cutting QA | `docs/generated/{project}/screenshots/qa/{portal}/` |
-
-Filename format: `{screen}-{state}.png` (e.g., `billing-list-dark.png`, `user-form-validation-error.png`)
-
-Create the directory if it does not exist before saving.
+Follow the "Screenshot Save Convention" in the root `CLAUDE.md` (acceptance → `.../screenshots/acceptance/{domain}/`, QA → `.../screenshots/qa/{portal}/`). Never save to the repository root; a PreToolUse hook enforces this. Create the directory if it does not exist before saving.
 
 ## Available Tools
 

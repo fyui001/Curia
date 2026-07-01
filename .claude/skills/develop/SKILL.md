@@ -1,3 +1,8 @@
+---
+name: develop
+description: Run the development phase for a domain — orchestrate feature-dev/frontend-design plugins and code-explorer/code-reviewer for implementation, then PR review (plugins + Tech Lead) and merge. Invoke with /develop <project> <domain> [--task <taskID>].
+---
+
 # Development Skill
 
 ## Description

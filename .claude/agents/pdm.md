@@ -13,7 +13,7 @@ You make decisions, verify, and propose improvements from the perspectives of pr
 
 ## Project-Specific Information
 
-Always read the target project's `CLAUDE.md` first to understand the project overview, tech stack, UI hostname, and location of business manuals.
+Always read the target project's `CLAUDE.md` first to understand the project overview, tech stack, UI hostname, and location of business manuals. Also read `CLAUDE.local.md` in the same directory if it exists — it holds local-only settings that are not committed, and is authoritative where the two overlap.
 
 ## Your Role
 

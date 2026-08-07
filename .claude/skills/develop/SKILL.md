@@ -26,7 +26,7 @@ When this skill is invoked, start the development phase.
 
 ### Step 0: Prerequisites Check
 
-1. Read `src/{project}/CLAUDE.md` to understand project-specific information
+1. Read `src/{project}/CLAUDE.md` — and `src/{project}/CLAUDE.local.md` if it exists (authoritative when both exist) — to understand project-specific information
 2. Review the requirements document (`docs/generated/{project}/requirements/{domain}/`) or GitHub Issue content
 3. If a task list exists, analyze dependencies and identify executable tasks
 4. Check `gh pr list --state open` for unmerged PRs. If any exist, prioritize their merge first

@@ -25,7 +25,7 @@ When this skill is invoked, start the requirements definition phase.
 
 ### Step 0: Load Project Information
 
-1. Read `src/{project}/CLAUDE.md` to understand the tech stack, directory structure, reference projects, and existing system information
+1. Read `src/{project}/CLAUDE.md` — and `src/{project}/CLAUDE.local.md` if it exists — to understand the tech stack, directory structure, reference projects, and existing system information. When both exist, `CLAUDE.local.md` is authoritative
 2. Check the target domain's position and dependencies from the "Implementation Phases" section in the project CLAUDE.md
 3. Verify whether prerequisite domains have been defined in `docs/generated/{project}/requirements/`
 4. Create the `docs/generated/{project}/requirements/{domain}/` directory

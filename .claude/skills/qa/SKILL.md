@@ -27,7 +27,7 @@ When this skill is invoked, start the cross-cutting QA phase.
 
 ### Step 0: Prerequisites Check
 
-1. Read `src/{project}/CLAUDE.md` to understand project-specific information
+1. Read `src/{project}/CLAUDE.md` — and `src/{project}/CLAUDE.local.md` if it exists (authoritative when both exist) — to understand project-specific information
 2. Create an Epic Issue on GitHub if one doesn't exist
 3. Get the full screen list for the target portal from the project's directory structure
 4. Verify Docker containers are running (`docker compose ps`)

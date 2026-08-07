@@ -57,6 +57,19 @@ ln -s ../../src/group/ProjectC/docs docs/generated/ProjectC
 Each project declares its specifics in `CLAUDE.md`.
 Curia's skills and agents read this CLAUDE.md and dynamically adapt their behavior.
 
+A project may also carry a `CLAUDE.local.md` alongside it, mirroring this repository's own
+`CLAUDE.md` / `CLAUDE.local.md` split:
+
+| File | Committed | Content |
+|---|---|---|
+| `CLAUDE.md` | Yes | Only what makes sense to a standalone clone of that repository |
+| `CLAUDE.local.md` | **No** — excluded via the project's `.git/info/exclude` | Local-only settings: host paths, reference projects, anything that must leave no trace in the repository's Git history |
+
+Skills and agents read both, and `CLAUDE.local.md` wins where the two overlap.
+Never move content from `CLAUDE.local.md` into `CLAUDE.md`. `.git/info/exclude` has no effect on
+a file that is already tracked — if `CLAUDE.local.md` ever shows up in `git status` as anything
+other than untracked, stop and untrack it before committing.
+
 ### Registered Projects
 
 | Project | Path | Status |

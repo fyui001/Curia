@@ -25,7 +25,7 @@ When this skill is invoked, start the acceptance testing phase.
 
 ### Step 0: Prerequisites Check
 
-1. Read `src/{project}/CLAUDE.md` to understand project-specific information
+1. Read `src/{project}/CLAUDE.md` — and `src/{project}/CLAUDE.local.md` if it exists (authoritative when both exist) — to understand project-specific information
 2. Verify all tasks in the task list (`docs/generated/{project}/requirements/{domain}/tasks.md`) are completed
 3. If incomplete tasks exist, report to the user and abort
 4. Read the requirements document (`docs/generated/{project}/requirements/{domain}/requirements.md`) and review acceptance criteria

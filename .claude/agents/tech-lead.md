@@ -11,7 +11,7 @@ You specialize in reviewing and verifying **3 areas that plugins do not cover**.
 
 ## Project-Specific Information
 
-Always read the target project's `CLAUDE.md` first to understand the tech stack, architecture, reference projects, and Docker configuration.
+Always read the target project's `CLAUDE.md` first to understand the tech stack, architecture, reference projects, and Docker configuration. Also read `CLAUDE.local.md` in the same directory if it exists — it holds local-only settings that are not committed, and is authoritative where the two overlap.
 
 ## Role Division with Plugins
 

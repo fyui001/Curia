@@ -184,6 +184,23 @@ Before marking a PR as complete/mergeable, **all** of the following must be sati
 - [ ] Screenshots taken with Playwright MCP and saved to `docs/generated/{project}/screenshots/develop/{domain}/`
 - [ ] Visibility confirmed in both light mode and dark mode
 
+### Walk the Screen as a Person (When Frontend Changes Exist) — **Gate**
+
+Measuring that the change works is not enough. **Before calling anything done**, open the
+screen on the real machine and use it the way a person would. A report that does not include
+this walk is not accepted, from an agent or from this skill.
+
+- [ ] Opened the screen in its **first state** — nothing selected, no data, empty list — not only
+      the state where data is present
+- [ ] **Reached the screen the way a user reaches it**, and left it the way a user leaves it:
+      followed the link in, pressed **Back**, pressed Back again, reloaded, opened it directly by URL
+- [ ] **Pressed the controls** — every button that changed, plus the keys the control implies
+- [ ] Did the **whole errand end to end**, not just the changed step (e.g. list → open → act → back to list)
+- [ ] **Opened the screenshots and looked at them**, and asked: does this look like a real one of
+      these? Compare against a real product of the same kind
+- [ ] Anything odd found on the way is **reported even if it is outside the task** — do not fix it
+      silently, and do not leave it unsaid
+
 ### Merge
 - [ ] **Merge when all checks pass** (CI green + all reviews fixed + all external reviews addressed → autonomous merge)
 - [ ] PR always created on a branch

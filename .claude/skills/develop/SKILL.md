@@ -201,6 +201,26 @@ this walk is not accepted, from an agent or from this skill.
 - [ ] Anything odd found on the way is **reported even if it is outside the task** — do not fix it
       silently, and do not leave it unsaid
 
+### Comments and the Language of Git Text — **Gate**
+
+Applies to every PR, from this skill and from every agent it delegates to. **Say both of these
+in the agent's instructions**; a soft phrasing like "no redundant comments" comes back as prose.
+
+- [ ] **Comments default to zero.** `//`, `/* */`, JSDoc and `///` XML doc summaries are all
+      comments. Only two survive: a `TODO`/`FIXME` for work someone will really do, and **one
+      line** naming a trap a reader would fall into (a browser or library bug, a spec-mandated
+      workaround). Design rationale, measurements, requirement ids and issue numbers never
+      belong in code — they go in the requirements and the design canon
+- [ ] **Counted before merge**, not judged by eye:
+      `gh pr diff <n> | grep -E '^\+' | grep -cE '^\+\s*(///|//|/\*|\*)'`
+      Compare against the repository's own baseline (Carina master is about 0.3%). Generated
+      files are excluded: Vela `repository/client/schema.ts`, EF `*.Designer.cs`, model snapshots
+- [ ] **PR title, PR body and commit messages are Japanese.** Identifiers, test names and
+      branch names stay English. A branch already pushed cannot have its commits reworded
+      (force-push is refused), so cut a fresh branch rather than leaving English commits
+- [ ] The three content checks in each repository's `CLAUDE.local.md` still apply: the
+      implementation only, the standalone-clone test, the leak grep
+
 ### Merge
 - [ ] **Merge when all checks pass** (CI green + all reviews fixed + all external reviews addressed → autonomous merge)
 - [ ] PR always created on a branch

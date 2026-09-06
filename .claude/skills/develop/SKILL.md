@@ -218,6 +218,13 @@ in the agent's instructions**; a soft phrasing like "no redundant comments" come
 - [ ] **PR title, PR body and commit messages are Japanese.** Identifiers, test names and
       branch names stay English. A branch already pushed cannot have its commits reworded
       (force-push is refused), so cut a fresh branch rather than leaving English commits
+- [ ] **The PR body is bullets and nothing else.** Every line starts with `- `, except the
+      trailing generated-with line. No heading, no opening paragraph, no closing summary, no
+      test counts and no CI result — the checks report those. Plain form, not polite form.
+      Adding a test is one bullet about what it pins, never how many passed. Before posting,
+      read the body and delete every line that does not begin with `- `. **Copy this rule
+      verbatim into an agent's instructions whenever an agent writes the PR** — an agent that
+      is not told will write a preface and a summary every time
 - [ ] The three content checks in each repository's `CLAUDE.local.md` still apply: the
       implementation only, the standalone-clone test, the leak grep
 

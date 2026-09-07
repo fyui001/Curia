@@ -215,6 +215,10 @@ in the agent's instructions**; a soft phrasing like "no redundant comments" come
       `gh pr diff <n> | grep -E '^\+' | grep -cE '^\+\s*(///|//|/\*|\*)'`
       Compare against the repository's own baseline (Carina master is about 0.3%). Generated
       files are excluded: Vela `repository/client/schema.ts`, EF `*.Designer.cs`, model snapshots
+      and **the migration `.cs` itself** — `dotnet ef` writes `/// <inheritdoc />` on the class
+      and on `Up`/`Down`, and every migration on master carries them. **Never let an agent strip
+      those to make the count pass**; a hand-edited generated file comes back as a diff the next
+      time it is regenerated. Fix the exclusion, not the file
 - [ ] **PR title, PR body and commit messages are Japanese.** Identifiers, test names and
       branch names stay English. A branch already pushed cannot have its commits reworded
       (force-push is refused), so cut a fresh branch rather than leaving English commits

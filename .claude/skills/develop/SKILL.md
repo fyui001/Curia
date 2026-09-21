@@ -229,6 +229,13 @@ in the agent's instructions**; a soft phrasing like "no redundant comments" come
       read the body and delete every line that does not begin with `- `. **Copy this rule
       verbatim into an agent's instructions whenever an agent writes the PR** — an agent that
       is not told will write a preface and a summary every time
+- [ ] **The pull request has an assignee before it is announced.** Pass `--assignee fyui001` to
+      `gh pr create`. If that is not accepted, assign with the GraphQL mutation
+      `addAssigneesToAssignable` (the REST assignee endpoint sits under a repository's issue
+      path, so the issue-write hook refuses the whole command). `gh pr edit --add-assignee`
+      fails silently, so never trust it. Read the PR back and confirm the field yourself:
+      finding a field already correct after the user has fixed it is not a check.
+      **Copy this rule verbatim into an agent's instructions whenever an agent opens the PR.**
 - [ ] The three content checks in each repository's `CLAUDE.local.md` still apply: the
       implementation only, the standalone-clone test, the leak grep
 

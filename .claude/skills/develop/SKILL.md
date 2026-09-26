@@ -206,13 +206,18 @@ this walk is not accepted, from an agent or from this skill.
 Applies to every PR, from this skill and from every agent it delegates to. **Say both of these
 in the agent's instructions**; a soft phrasing like "no redundant comments" comes back as prose.
 
-- [ ] **Comments default to zero.** `//`, `/* */`, JSDoc and `///` XML doc summaries are all
-      comments. Only two survive: a `TODO`/`FIXME` for work someone will really do, and **one
-      line** naming a trap a reader would fall into (a browser or library bug, a spec-mandated
-      workaround). Design rationale, measurements, requirement ids and issue numbers never
-      belong in code — they go in the requirements and the design canon
-- [ ] **Counted before merge**, not judged by eye:
-      `gh pr diff <n> | grep -E '^\+' | grep -cE '^\+\s*(///|//|/\*|\*)'`
+- [ ] **Comments default to zero.** `//` and `/* */` inside code survive in two cases only: a
+      `TODO`/`FIXME` for work someone will really do, and **one line** naming a trap a reader
+      would fall into (a browser or library bug, a spec-mandated workaround). Design rationale,
+      measurements, requirement ids and issue numbers never belong in code — they go in the
+      requirements and the design canon
+- [ ] **Documentation comments follow the language's own convention**, not an essay. In .NET,
+      `///` carries a short `<summary>` of what the member does or represents, and `<param>`,
+      `<returns>`, `<exception>` or `<remarks>` only where the signature does not already say it.
+      JSDoc/TSDoc likewise. A doc comment that explains why the code was built this way is design
+      rationale and moves out of the code like any other
+- [ ] **Counted before merge**, not judged by eye (documentation comments are read, not counted):
+      `gh pr diff <n> | grep -E '^\+' | grep -vE '^\+\s*(///|/\*\*)' | grep -cE '^\+\s*(//|/\*)'`
       Compare against the repository's own baseline (Carina master is about 0.3%). Generated
       files are excluded: Vela `repository/client/schema.ts`, EF `*.Designer.cs`, model snapshots
       and **the migration `.cs` itself** — `dotnet ef` writes `/// <inheritdoc />` on the class
